@@ -13,7 +13,7 @@
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
-max-width: 375px;
+max-width: 170px;
 margin: 0 auto;
 min-height: 100vh;
 position: relative;
@@ -28,8 +28,8 @@ transform-origin: 50% 50%;
 }
 .splash-screen {
 position: fixed;
-top: -100%;
-left: -100%;
+top: 0;
+left: 0;
 width: 100%;
 height: 100%;
 display: flex;
