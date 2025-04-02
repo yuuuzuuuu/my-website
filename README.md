@@ -206,34 +206,6 @@ View All
 <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
 </div>
 </div>
-<!-- Budget Progress Overview -->
-<div class="bg-white rounded-lg shadow-sm p-4 mb-4">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-sm font-medium">Budget Overview</h3>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetFromTransactions">
-View Details
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3 mb-3">
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="text-sm font-medium text-green-500">$6,240.00</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="text-sm font-medium text-red-500">$1,954.35</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Remaining</div>
-<div class="text-sm font-medium">$4,285.65</div>
-</div>
-</div>
-<div class="w-full h-2 bg-gray-200 rounded-full">
-<div class="h-full bg-primary rounded-full" style="width: 31%"></div>
-</div>
-<div class="text-xs text-gray-500 text-right mt-1">31% of budget spent</div>
-</div>
 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
 <div class="flex items-center">
@@ -338,7 +310,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -361,7 +333,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -384,7 +356,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -432,27 +404,11 @@ const toggleSpan = this.nextElementSibling;
 if (this.checked) {
 toggleSpan.classList.add('bg-primary');
 toggleSpan.classList.remove('bg-gray-300');
-toggleSpan.style.setProperty('--transform-translate-x', '20px');
+toggleSpan.querySelector('::before').style.transform = 'translateX(20px)';
 } else {
 toggleSpan.classList.remove('bg-primary');
 toggleSpan.classList.add('bg-gray-300');
-toggleSpan.style.setProperty('--transform-translate-x', '0px');
-}
-// If this is a spending limit toggle, update the limit status
-const limitContainer = this.closest('.flex.justify-between.items-center');
-if (limitContainer) {
-  const categoryName = limitContainer.querySelector('.text-sm.font-medium')?.textContent;
-  if (categoryName) {
-    showNotification(`${categoryName} limit ${this.checked ? 'activated' : 'deactivated'}`);
-    
-    // Update the data in localStorage if needed
-    const data = getFinancialData();
-    const category = categoryName.toLowerCase().replace(/\s+/g, '');
-    if (data.budgets[category]) {
-      data.budgets[category].active = this.checked;
-      saveFinancialData(data);
-    }
-  }
+toggleSpan.querySelector('::before').style.transform = 'translateX(0)';
 }
 });
 });
@@ -558,12 +514,11 @@ transactions: [
 },
 savings: 2135.65,
 budgets: {
-food: { limit: 600, spent: 450, active: true },
-transportation: { limit: 300, spent: 180, active: true },
-shopping: { limit: 400, spent: 320, active: true },
-entertainment: { limit: 200, spent: 120, active: true },
-utilities: { limit: 300, spent: 180, active: true },
-restaurants: { limit: 300, spent: 195, active: true }
+food: { limit: 600, spent: 450 },
+transportation: { limit: 300, spent: 180 },
+shopping: { limit: 400, spent: 320 },
+entertainment: { limit: 200, spent: 120 },
+utilities: { limit: 300, spent: 180 }
 },
 goals: [
 { id: 1, name: 'Save for Vacation', target: 3000, current: 1500, date: '2025-08-15', priority: 'medium' },
@@ -584,14 +539,15 @@ localStorage.setItem('financialData', JSON.stringify(data));
 // Add income
 function addIncome(amount, category, date, note) {
 const data = getFinancialData();
-const newId = data.income.transactions.length > 0 ?
-Math.max(...data.income.transactions.map(t => t.id)) + 1 : 1;
+const newId = data.income.transactions.length > 0 ? 
+    Math.max(...data.income.transactions.map(t => t.id)) + 1 : 1;
+    
 const newTransaction = {
-id: newId,
-amount: amount,
-category: category,
-date: date,
-note: note
+    id: newId,
+    amount: amount,
+    category: category,
+    date: date,
+    note: note
 };
 data.income.transactions.unshift(newTransaction);
 data.income.total += amount;
@@ -603,21 +559,22 @@ addTransactionToUI(newTransaction, 'income');
 // Add expense
 function addExpense(amount, category, date, note) {
 const data = getFinancialData();
-const newId = data.expenses.transactions.length > 0 ?
-Math.max(...data.expenses.transactions.map(t => t.id)) + 1 : 1;
+const newId = data.expenses.transactions.length > 0 ? 
+    Math.max(...data.expenses.transactions.map(t => t.id)) + 1 : 1;
+    
 const newTransaction = {
-id: newId,
-amount: amount,
-category: category,
-date: date,
-note: note
+    id: newId,
+    amount: amount,
+    category: category,
+    date: date,
+    note: note
 };
 data.expenses.transactions.unshift(newTransaction);
 data.expenses.total += amount;
 data.balance -= amount;
 // Update budget if category exists
 if (data.budgets[category]) {
-data.budgets[category].spent += amount;
+    data.budgets[category].spent += amount;
 }
 saveFinancialData(data);
 // Add to recent transactions list
@@ -627,72 +584,73 @@ addTransactionToUI(newTransaction, 'expense');
 function addTransactionToUI(transaction, type) {
 const transactionsList = document.querySelector('.bg-white.rounded-lg.shadow-sm.overflow-hidden');
 if (!transactionsList) return;
-const iconClass = type === 'income' ?
-'ri-bank-card-line text-blue-500' :
-getCategoryIcon(transaction.category);
+const iconClass = type === 'income' ? 
+    'ri-bank-card-line text-blue-500' : 
+    getCategoryIcon(transaction.category);
+    
 const bgClass = type === 'income' ? 'bg-blue-100' : 'bg-red-100';
 const amountClass = type === 'income' ? 'text-green-500' : 'text-red-500';
 const amountPrefix = type === 'income' ? '+' : '-';
 const formattedDate = new Date(transaction.date).toLocaleDateString('en-US', {
-year: 'numeric',
-month: 'long',
-day: 'numeric'
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
 });
 const newTransactionHTML = `
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item ${type}-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center ${bgClass} rounded-full mr-3">
-<i class="${iconClass}"></i>
-</div>
-<div>
-<div class="text-sm font-medium">${transaction.note || getCategoryName(transaction.category)}</div>
-<div class="text-xs text-gray-500">${formattedDate}</div>
-</div>
-</div>
-<div class="text-sm font-medium ${amountClass}">${amountPrefix}$${transaction.amount.toFixed(2)}</div>
+    <div class="flex items-center">
+        <div class="w-8 h-8 flex items-center justify-center ${bgClass} rounded-full mr-3">
+            <i class="${iconClass}"></i>
+        </div>
+        <div>
+            <div class="text-sm font-medium">${transaction.note || getCategoryName(transaction.category)}</div>
+            <div class="text-xs text-gray-500">${formattedDate}</div>
+        </div>
+    </div>
+    <div class="text-sm font-medium ${amountClass}">${amountPrefix}$${transaction.amount.toFixed(2)}</div>
 </div>
 `;
 // Insert at the top of the list
 const firstTransaction = transactionsList.querySelector('.transaction-item');
 if (firstTransaction) {
-firstTransaction.insertAdjacentHTML('beforebegin', newTransactionHTML);
+    firstTransaction.insertAdjacentHTML('beforebegin', newTransactionHTML);
 } else {
-transactionsList.innerHTML = newTransactionHTML;
+    transactionsList.innerHTML = newTransactionHTML;
 }
 // If there are more than 6 transactions, remove the last one
 const allTransactions = transactionsList.querySelectorAll('.transaction-item');
 if (allTransactions.length > 6) {
-allTransactions[allTransactions.length - 1].remove();
+    allTransactions[allTransactions.length - 1].remove();
 }
 }
 // Get category icon
 function getCategoryIcon(category) {
 switch(category) {
-case 'food': return 'ri-restaurant-line text-red-500';
-case 'transportation': return 'ri-taxi-line text-red-500';
-case 'shopping': return 'ri-shopping-bag-line text-red-500';
-case 'entertainment': return 'ri-movie-line text-red-500';
-case 'utilities': return 'ri-home-line text-red-500';
-case 'salary': return 'ri-bank-card-line text-blue-500';
-case 'freelance': return 'ri-briefcase-line text-blue-500';
-case 'investment': return 'ri-funds-line text-blue-500';
-case 'gift': return 'ri-gift-line text-blue-500';
-default: return 'ri-question-line text-gray-500';
+    case 'food': return 'ri-restaurant-line text-red-500';
+    case 'transportation': return 'ri-taxi-line text-red-500';
+    case 'shopping': return 'ri-shopping-bag-line text-red-500';
+    case 'entertainment': return 'ri-movie-line text-red-500';
+    case 'utilities': return 'ri-home-line text-red-500';
+    case 'salary': return 'ri-bank-card-line text-blue-500';
+    case 'freelance': return 'ri-briefcase-line text-blue-500';
+    case 'investment': return 'ri-funds-line text-blue-500';
+    case 'gift': return 'ri-gift-line text-blue-500';
+    default: return 'ri-question-line text-gray-500';
 }
 }
 // Get category name
 function getCategoryName(category) {
 switch(category) {
-case 'food': return 'Food & Dining';
-case 'transportation': return 'Transportation';
-case 'shopping': return 'Shopping';
-case 'entertainment': return 'Entertainment';
-case 'utilities': return 'Utilities';
-case 'salary': return 'Salary';
-case 'freelance': return 'Freelance Income';
-case 'investment': return 'Investment Return';
-case 'gift': return 'Gift Received';
-default: return 'Other';
+    case 'food': return 'Food & Dining';
+    case 'transportation': return 'Transportation';
+    case 'shopping': return 'Shopping';
+    case 'entertainment': return 'Entertainment';
+    case 'utilities': return 'Utilities';
+    case 'salary': return 'Salary';
+    case 'freelance': return 'Freelance Income';
+    case 'investment': return 'Investment Return';
+    case 'gift': return 'Gift Received';
+    default: return 'Other';
 }
 }
 // Update balance summary
@@ -714,27 +672,29 @@ function updateBudgetProgress() {
 const data = getFinancialData();
 const budgetElements = document.querySelectorAll('.progress-ring');
 if (budgetElements.length >= 3) {
-// Food & Dining
-const foodPercentage = Math.min(100, Math.round((data.budgets.food.spent / data.budgets.food.limit) * 100));
-const foodOffset = 175.9 - (175.9 * foodPercentage / 100);
-budgetElements[0].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', foodOffset);
-budgetElements[0].parentElement.querySelector('.absolute.inset-0 div').textContent = `${foodPercentage}%`;
-budgetElements[0].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent =
-`$${data.budgets.food.spent} / $${data.budgets.food.limit}`;
-// Transportation
-const transportPercentage = Math.min(100, Math.round((data.budgets.transportation.spent / data.budgets.transportation.limit) * 100));
-const transportOffset = 175.9 - (175.9 * transportPercentage / 100);
-budgetElements[1].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', transportOffset);
-budgetElements[1].parentElement.querySelector('.absolute.inset-0 div').textContent = `${transportPercentage}%`;
-budgetElements[1].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent =
-`$${data.budgets.transportation.spent} / $${data.budgets.transportation.limit}`;
-// Shopping
-const shoppingPercentage = Math.min(100, Math.round((data.budgets.shopping.spent / data.budgets.shopping.limit) * 100));
-const shoppingOffset = 175.9 - (175.9 * shoppingPercentage / 100);
-budgetElements[2].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', shoppingOffset);
-budgetElements[2].parentElement.querySelector('.absolute.inset-0 div').textContent = `${shoppingPercentage}%`;
-budgetElements[2].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent =
-`$${data.budgets.shopping.spent} / $${data.budgets.shopping.limit}`;
+    // Food & Dining
+    const foodPercentage = Math.min(100, Math.round((data.budgets.food.spent / data.budgets.food.limit) * 100));
+    const foodOffset = 175.9 - (175.9 * foodPercentage / 100);
+    budgetElements[0].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', foodOffset);
+    budgetElements[0].parentElement.querySelector('.absolute.inset-0 div').textContent = `${foodPercentage}%`;
+    budgetElements[0].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent = 
+        `$${data.budgets.food.spent} / $${data.budgets.food.limit}`;
+    
+    // Transportation
+    const transportPercentage = Math.min(100, Math.round((data.budgets.transportation.spent / data.budgets.transportation.limit) * 100));
+    const transportOffset = 175.9 - (175.9 * transportPercentage / 100);
+    budgetElements[1].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', transportOffset);
+    budgetElements[1].parentElement.querySelector('.absolute.inset-0 div').textContent = `${transportPercentage}%`;
+    budgetElements[1].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent = 
+        `$${data.budgets.transportation.spent} / $${data.budgets.transportation.limit}`;
+    
+    // Shopping
+    const shoppingPercentage = Math.min(100, Math.round((data.budgets.shopping.spent / data.budgets.shopping.limit) * 100));
+    const shoppingOffset = 175.9 - (175.9 * shoppingPercentage / 100);
+    budgetElements[2].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', shoppingOffset);
+    budgetElements[2].parentElement.querySelector('.absolute.inset-0 div').textContent = `${shoppingPercentage}%`;
+    budgetElements[2].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent = 
+        `$${data.budgets.shopping.spent} / $${data.budgets.shopping.limit}`;
 }
 }
 // Login modal
@@ -883,34 +843,6 @@ View All
 <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
 </div>
 </div>
-<!-- Budget Progress Overview -->
-<div class="bg-white rounded-lg shadow-sm p-4 mb-4">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-sm font-medium">Budget Overview</h3>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetFromTransactions">
-View Details
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3 mb-3">
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="text-sm font-medium text-green-500">$6,240.00</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="text-sm font-medium text-red-500">$1,954.35</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Remaining</div>
-<div class="text-sm font-medium">$4,285.65</div>
-</div>
-</div>
-<div class="w-full h-2 bg-gray-200 rounded-full">
-<div class="h-full bg-primary rounded-full" style="width: 31%"></div>
-</div>
-<div class="text-xs text-gray-500 text-right mt-1">31% of budget spent</div>
-</div>
 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
 <div class="flex items-center">
@@ -1015,7 +947,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -1038,7 +970,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -1061,7 +993,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -1409,7 +1341,7 @@ const content = `
 <form id="addLimitForm">
 <div class="mb-4">
 <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-<select id="limitCategory" class="w-full px-3 py-2 border border-gray-300 rounded bg-white">
+<select class="w-full px-3 py-2 border border-gray-300 rounded bg-white">
 <option value="">Select a category</option>
 <option value="entertainment">Entertainment</option>
 <option value="utilities">Utilities</option>
@@ -1422,12 +1354,12 @@ const content = `
 <label class="block text-sm font-medium text-gray-700 mb-1">Limit Amount</label>
 <div class="relative">
 <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-<input type="number" id="limitAmount" class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded" placeholder="0.00" step="0.01" min="0" required>
+<input type="number" class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded" placeholder="0.00" step="0.01" min="0" required>
 </div>
 </div>
 <div class="mb-4">
 <label class="block text-sm font-medium text-gray-700 mb-1">Period</label>
-<select id="limitPeriod" class="w-full px-3 py-2 border border-gray-300 rounded bg-white">
+<select class="w-full px-3 py-2 border border-gray-300 rounded bg-white">
 <option value="weekly">Weekly</option>
 <option value="monthly" selected>Monthly</option>
 <option value="yearly">Yearly</option>
@@ -1437,8 +1369,8 @@ const content = `
 <label class="block text-sm font-medium text-gray-700 mb-1">Notification</label>
 <div class="flex items-center">
 <label class="relative inline-block w-10 h-5 cursor-pointer mr-2">
-<input type="checkbox" id="limitNotification" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<input type="checkbox" class="opacity-0 w-0 h-0" checked>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 <span class="text-sm">Notify me when I reach 80% of the limit</span>
 </div>
@@ -1446,115 +1378,9 @@ const content = `
 </form>
 `;
 const modal = createModal('Add Spending Limit', content, (modal) => {
-const category = modal.querySelector('#limitCategory').value;
-const amount = parseFloat(modal.querySelector('#limitAmount').value);
-const period = modal.querySelector('#limitPeriod').value;
-const notification = modal.querySelector('#limitNotification').checked;
-if (!category) {
-  showNotification('Please select a category');
-  return;
-}
-if (!amount || isNaN(amount) || amount <= 0) {
-  showNotification('Please enter a valid amount');
-  return;
-}
-// Add the new limit to the data
-const data = getFinancialData();
-if (!data.budgets[category]) {
-  data.budgets[category] = {
-    limit: amount,
-    spent: 0,
-    active: true,
-    period: period,
-    notification: notification
-  };
-  saveFinancialData(data);
-  
-  // Show success notification
-  showNotification(`${getCategoryName(category)} limit added successfully!`);
-  
-  // Add the new limit to the UI
-  const limitsContainer = document.querySelector('.bg-white.rounded-lg.shadow-sm.overflow-hidden');
-  if (limitsContainer) {
-    const newLimitHTML = `
-    <div class="p-3 border-b border-gray-100 flex justify-between items-center">
-      <div class="flex items-center">
-        <div class="w-8 h-8 flex items-center justify-center bg-indigo-100 rounded-full mr-3">
-          <i class="${getCategoryIcon(category)}"></i>
-        </div>
-        <div>
-          <div class="text-sm font-medium">${getCategoryName(category)}</div>
-          <div class="w-24 h-1.5 bg-gray-200 rounded-full mt-1">
-            <div class="h-full bg-indigo-500 rounded-full" style="width: 0%"></div>
-          </div>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <div class="text-right">
-          <div class="text-xs text-gray-500">Limit</div>
-          <div class="text-sm font-medium">$${amount.toFixed(2)} / ${period}</div>
-        </div>
-        <label class="relative inline-block w-10 h-5 cursor-pointer">
-          <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-          <span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
-        </label>
-      </div>
-    </div>
-    `;
-    
-    // Insert the new limit at the beginning of the list
-    const firstLimit = limitsContainer.querySelector('.p-3');
-    if (firstLimit) {
-      firstLimit.insertAdjacentHTML('beforebegin', newLimitHTML);
-    } else {
-      limitsContainer.innerHTML = newLimitHTML;
-    }
-    
-    // Reattach event listeners for the toggle
-    const newToggle = limitsContainer.querySelector('input[type="checkbox"]:not([data-initialized])');
-    if (newToggle) {
-      newToggle.addEventListener('change', function() {
-        const toggleSpan = this.nextElementSibling;
-        if (this.checked) {
-          toggleSpan.classList.add('bg-primary');
-          toggleSpan.classList.remove('bg-gray-300');
-          toggleSpan.style.setProperty('--transform-translate-x', '20px');
-        } else {
-          toggleSpan.classList.remove('bg-primary');
-          toggleSpan.classList.add('bg-gray-300');
-          toggleSpan.style.setProperty('--transform-translate-x', '0px');
-        }
-        
-        // Update the limit status
-        const limitContainer = this.closest('.flex.justify-between.items-center');
-        if (limitContainer) {
-          const categoryName = limitContainer.querySelector('.text-sm.font-medium')?.textContent;
-          if (categoryName) {
-            showNotification(`${categoryName} limit ${this.checked ? 'activated' : 'deactivated'}`);
-            
-            // Update the data in localStorage
-            const data = getFinancialData();
-            const category = categoryName.toLowerCase().replace(/\s+/g, '');
-            if (data.budgets[category]) {
-              data.budgets[category].active = this.checked;
-              saveFinancialData(data);
-            }
-          }
-        }
-      });
-      newToggle.setAttribute('data-initialized', 'true');
-    }
-  }
-} else {
-  // Update existing limit
-  data.budgets[category].limit = amount;
-  data.budgets[category].period = period;
-  data.budgets[category].notification = notification;
-  data.budgets[category].active = true;
-  saveFinancialData(data);
-  
-  showNotification(`${getCategoryName(category)} limit updated successfully!`);
-}
+const form = modal.querySelector('#addLimitForm');
+// Handle add limit logic here
+console.log('Limit added');
 });
 const submitBtn = modal.querySelector('.modal-submit-btn');
 submitBtn.textContent = 'Add Limit';
@@ -1661,34 +1487,6 @@ mainContent.innerHTML = `
 <i class="ri-arrow-left-line ri-lg text-gray-500"></i>
 </a>
 <h2 class="text-xl font-medium">Transaction History</h2>
-</div>
-<!-- Budget Progress Overview -->
-<div class="bg-white rounded-lg shadow-sm p-4 mb-4">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-sm font-medium">Budget Overview</h3>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetFromTransactions">
-View Details
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3 mb-3">
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="text-sm font-medium text-green-500">$6,240.00</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="text-sm font-medium text-red-500">$1,954.35</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Remaining</div>
-<div class="text-sm font-medium">$4,285.65</div>
-</div>
-</div>
-<div class="w-full h-2 bg-gray-200 rounded-full">
-<div class="h-full bg-primary rounded-full" style="width: 31%"></div>
-</div>
-<div class="text-xs text-gray-500 text-right mt-1">31% of budget spent</div>
 </div>
 <div class="flex justify-between items-center mb-4">
 <div class="flex gap-2">
@@ -1838,14 +1636,6 @@ item.style.display = 'none';
 }
 });
 });
-// Add event listener for view budget details from transactions page
-const viewAllBudgetFromTransactions = document.getElementById('viewAllBudgetFromTransactions');
-if (viewAllBudgetFromTransactions) {
-viewAllBudgetFromTransactions.addEventListener('click', function(e) {
-e.preventDefault();
-showBudgetDetailsModal();
-});
-}
 // Add event listener for back button
 const backToHomeBtn = document.getElementById('backToHomeBtn');
 if (backToHomeBtn) {
@@ -1960,34 +1750,6 @@ View All
 <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
 </div>
 </div>
-<!-- Budget Progress Overview -->
-<div class="bg-white rounded-lg shadow-sm p-4 mb-4">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-sm font-medium">Budget Overview</h3>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetFromTransactions">
-View Details
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3 mb-3">
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="text-sm font-medium text-green-500">$6,240.00</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="text-sm font-medium text-red-500">$1,954.35</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Remaining</div>
-<div class="text-sm font-medium">$4,285.65</div>
-</div>
-</div>
-<div class="w-full h-2 bg-gray-200 rounded-full">
-<div class="h-full bg-primary rounded-full" style="width: 31%"></div>
-</div>
-<div class="text-xs text-gray-500 text-right mt-1">31% of budget spent</div>
-</div>
 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
 <div class="flex items-center">
@@ -2092,7 +1854,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -2115,7 +1877,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -2138,7 +1900,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -2475,34 +2237,6 @@ View All
 <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
 </div>
 </div>
-<!-- Budget Progress Overview -->
-<div class="bg-white rounded-lg shadow-sm p-4 mb-4">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-sm font-medium">Budget Overview</h3>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetFromTransactions">
-View Details
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3 mb-3">
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="text-sm font-medium text-green-500">$6,240.00</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="text-sm font-medium text-red-500">$1,954.35</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Remaining</div>
-<div class="text-sm font-medium">$4,285.65</div>
-</div>
-</div>
-<div class="w-full h-2 bg-gray-200 rounded-full">
-<div class="h-full bg-primary rounded-full" style="width: 31%"></div>
-</div>
-<div class="text-xs text-gray-500 text-right mt-1">31% of budget spent</div>
-</div>
 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
 <div class="flex items-center">
@@ -2607,7 +2341,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -2630,7 +2364,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -2653,7 +2387,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -3001,34 +2735,6 @@ View All
 <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
 </div>
 </div>
-<!-- Budget Progress Overview -->
-<div class="bg-white rounded-lg shadow-sm p-4 mb-4">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-sm font-medium">Budget Overview</h3>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetFromTransactions">
-View Details
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3 mb-3">
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="text-sm font-medium text-green-500">$6,240.00</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="text-sm font-medium text-red-500">$1,954.35</div>
-</div>
-<div class="text-center">
-<div class="text-xs text-gray-500 mb-1">Remaining</div>
-<div class="text-sm font-medium">$4,285.65</div>
-</div>
-</div>
-<div class="w-full h-2 bg-gray-200 rounded-full">
-<div class="h-full bg-primary rounded-full" style="width: 31%"></div>
-</div>
-<div class="text-xs text-gray-500 text-right mt-1">31% of budget spent</div>
-</div>
 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
 <div class="flex items-center">
@@ -3133,7 +2839,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -3156,7 +2862,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
@@ -3179,7 +2885,7 @@ View Details
 </div>
 <label class="relative inline-block w-10 h-5 cursor-pointer">
 <input type="checkbox" class="opacity-0 w-0 h-0" checked>
-<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all" style="--transform-translate-x: 20px;"></span>
+<span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
 </div>
