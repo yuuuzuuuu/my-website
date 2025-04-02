@@ -13,7 +13,7 @@
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
-max-width: 72px;
+max-width: 375px;
 margin: 0 auto;
 min-height: 100vh;
 position: relative;
@@ -30,7 +30,7 @@ transform-origin: 50% 50%;
 position: fixed;
 top: 0;
 left: 0;
-width: 100%;
+width: 50%;
 height: 100%;
 display: flex;
 flex-direction: column;
