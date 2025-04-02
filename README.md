@@ -95,7 +95,7 @@ animation: slideUp 0.3s ease;
 <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
 </div>
 <div class="w-8 h-8 rounded-full overflow-hidden cursor-pointer" id="profileBtn">
-<img src="https://readdy.ai/api/search-image?query=cartoon avatar of a young woman, minimalist design, flat illustration style, simple features, professional look, light background, clean design, the icon should take up 70 of the frame, centered composition&width=71&height=100&seq=123&orientation=squarish" alt="setting" class="w-full h-full object-cover">
+<img src="https://readdy.ai/api/search-image?query=cartoon avatar of a young woman, minimalist design, flat illustration style, simple features, professional look, light background, clean design, the icon should take up 70 of the frame, centered composition&width=100&height=100&seq=123&orientation=squarish" alt="profile" class="w-full h-full object-cover">
 </div>
 </div>
 </header>
