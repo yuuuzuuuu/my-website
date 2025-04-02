@@ -30,7 +30,7 @@ transform-origin: 50% 50%;
 position: fixed;
 top: 0;
 left: 0;
-width: 50%;
+width: 100%;
 height: 100%;
 display: flex;
 flex-direction: column;
@@ -94,9 +94,32 @@ animation: slideUp 0.3s ease;
 <i class="ri-notification-3-line ri-lg"></i>
 <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
 </div>
-<div class="w-8 h-8 rounded-full overflow-hidden cursor-pointer" id="profileBtn">
-<img src="https://readdy.ai/api/search-image?query=cartoon avatar of a young woman, minimalist design, flat illustration style, simple features, professional look, light background, clean design, the icon should take up 70 of the frame, centered composition&width=100&height=100&seq=123&orientation=squarish" alt="profile" class="w-full h-full object-cover">
-</div>
+<div class="settings-container">
+    <h2>Settings</h2>
+    <div class="setting-option">
+        <label for="categories">Manage Categories</label>
+        <button id="editCategories">Edit</button>
+    </div>
+    <div class="setting-option">
+        <label for="spendingLimit">Spending Limit</label>
+        <input type="number" id="spendingLimit" placeholder="Enter limit">
+    </div>
+    <div class="setting-option">
+        <label for="themeToggle">Dark Mode</label>
+        <input type="checkbox" id="themeToggle">
+    </div>
+    <div class="setting-option">
+        <label for="currency">Currency</label>
+        <select id="currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="IDR">IDR (Rp)</option>
+        </select>
+    </div>
+    <div class="setting-option">
+        <label for="settingsIcon">Settings</label>
+        <i class="ri-settings-3-line ri-lg"></i>
+    </div>
 </div>
 </header>
 <!-- Main Content -->
