@@ -449,6 +449,7 @@ item.style.display = 'none';
 document.addEventListener('DOMContentLoaded', function() {
 // Initialize financial data if not exists
 initializeFinancialData();
+
 const splashScreen = document.querySelector('.splash-screen');
 // Check if this is the first load or a return to home
 const isFirstLoad = sessionStorage.getItem('appLoaded') !== 'true';
@@ -487,6 +488,7 @@ notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
 setTimeout(() => notification.remove(), 300);
 }, 2000);
 };
+
 // Initialize financial data
 function initializeFinancialData() {
 if (!localStorage.getItem('financialData')) {
@@ -528,14 +530,17 @@ goals: [
 localStorage.setItem('financialData', JSON.stringify(initialData));
 }
 }
+
 // Get financial data
 function getFinancialData() {
 return JSON.parse(localStorage.getItem('financialData'));
 }
+
 // Save financial data
 function saveFinancialData(data) {
 localStorage.setItem('financialData', JSON.stringify(data));
 }
+
 // Add income
 function addIncome(amount, category, date, note) {
 const data = getFinancialData();
@@ -549,13 +554,16 @@ const newTransaction = {
     date: date,
     note: note
 };
+
 data.income.transactions.unshift(newTransaction);
 data.income.total += amount;
 data.balance += amount;
 saveFinancialData(data);
+
 // Add to recent transactions list
 addTransactionToUI(newTransaction, 'income');
 }
+
 // Add expense
 function addExpense(amount, category, date, note) {
 const data = getFinancialData();
@@ -569,21 +577,27 @@ const newTransaction = {
     date: date,
     note: note
 };
+
 data.expenses.transactions.unshift(newTransaction);
 data.expenses.total += amount;
 data.balance -= amount;
+
 // Update budget if category exists
 if (data.budgets[category]) {
     data.budgets[category].spent += amount;
 }
+
 saveFinancialData(data);
+
 // Add to recent transactions list
 addTransactionToUI(newTransaction, 'expense');
 }
+
 // Add transaction to UI
 function addTransactionToUI(transaction, type) {
 const transactionsList = document.querySelector('.bg-white.rounded-lg.shadow-sm.overflow-hidden');
 if (!transactionsList) return;
+
 const iconClass = type === 'income' ? 
     'ri-bank-card-line text-blue-500' : 
     getCategoryIcon(transaction.category);
@@ -591,11 +605,13 @@ const iconClass = type === 'income' ?
 const bgClass = type === 'income' ? 'bg-blue-100' : 'bg-red-100';
 const amountClass = type === 'income' ? 'text-green-500' : 'text-red-500';
 const amountPrefix = type === 'income' ? '+' : '-';
+
 const formattedDate = new Date(transaction.date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
 });
+
 const newTransactionHTML = `
 <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item ${type}-transaction">
     <div class="flex items-center">
@@ -610,6 +626,7 @@ const newTransactionHTML = `
     <div class="text-sm font-medium ${amountClass}">${amountPrefix}$${transaction.amount.toFixed(2)}</div>
 </div>
 `;
+
 // Insert at the top of the list
 const firstTransaction = transactionsList.querySelector('.transaction-item');
 if (firstTransaction) {
@@ -617,12 +634,14 @@ if (firstTransaction) {
 } else {
     transactionsList.innerHTML = newTransactionHTML;
 }
+
 // If there are more than 6 transactions, remove the last one
 const allTransactions = transactionsList.querySelectorAll('.transaction-item');
 if (allTransactions.length > 6) {
     allTransactions[allTransactions.length - 1].remove();
 }
 }
+
 // Get category icon
 function getCategoryIcon(category) {
 switch(category) {
@@ -638,6 +657,7 @@ switch(category) {
     default: return 'ri-question-line text-gray-500';
 }
 }
+
 // Get category name
 function getCategoryName(category) {
 switch(category) {
@@ -653,6 +673,7 @@ switch(category) {
     default: return 'Other';
 }
 }
+
 // Update balance summary
 function updateBalanceSummary() {
 const data = getFinancialData();
@@ -660,17 +681,22 @@ const balanceElement = document.querySelector('h3.text-2xl.font-bold');
 const incomeElement = document.querySelector('.bg-white.p-3.rounded.shadow-sm:nth-child(1) .font-semibold.text-sm');
 const expensesElement = document.querySelector('.bg-white.p-3.rounded.shadow-sm:nth-child(2) .font-semibold.text-sm');
 const savingsElement = document.querySelector('.bg-white.p-3.rounded.shadow-sm:nth-child(3) .font-semibold.text-sm');
+
 if (balanceElement) balanceElement.textContent = `$${data.balance.toFixed(2)}`;
 if (incomeElement) incomeElement.textContent = `$${data.income.total.toFixed(2)}`;
 if (expensesElement) expensesElement.textContent = `$${data.expenses.total.toFixed(2)}`;
 if (savingsElement) savingsElement.textContent = `$${data.savings.toFixed(2)}`;
+
 // Update budget progress
 updateBudgetProgress();
 }
+
 // Update budget progress
 function updateBudgetProgress() {
 const data = getFinancialData();
 const budgetElements = document.querySelectorAll('.progress-ring');
+
+
 if (budgetElements.length >= 3) {
     // Food & Dining
     const foodPercentage = Math.min(100, Math.round((data.budgets.food.spent / data.budgets.food.limit) * 100));
@@ -1194,6 +1220,7 @@ const amount = modal.querySelector('#incomeAmount').value;
 const category = modal.querySelector('#incomeCategory').value;
 const date = modal.querySelector('#incomeDate').value;
 const note = modal.querySelector('#incomeNote').value;
+
 if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
 showNotification('Please enter a valid amount');
 return;
@@ -1426,15 +1453,18 @@ const amount = modal.querySelector('#transactionAmount').value;
 const category = modal.querySelector('#categorySelect').value;
 const date = modal.querySelector('#transactionDate').value;
 const note = modal.querySelector('#transactionNote').value;
+
 if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
 showNotification('Please enter a valid amount');
 return;
 }
+
 if (isIncome) {
 addIncome(parseFloat(amount), category, date, note);
 } else {
 addExpense(parseFloat(amount), category, date, note);
 }
+
 // Show success notification
 showNotification(`${isIncome ? 'Income' : 'Expense'} added successfully!`);
 updateBalanceSummary();
