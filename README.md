@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,8 +39,8 @@
         }
 
         body {
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 16px;
             min-height: 100vh;
             position: relative;
             padding-bottom: 64px;
@@ -177,11 +178,11 @@
                 </div>
             </div>
             <div class="flex gap-2 mt-4">
-                <button class="flex-1 bg-primary text-white py-2.5 rounded-lg flex items-center justify-center cursor-pointer" id="addIncomeBtn">
+                <button class="flex-1 bg-primary text-white py-2.5 !rounded-button flex items-center justify-center cursor-pointer" id="addIncomeBtn">
                     <i class="ri-add-line ri-lg mr-1"></i>
                     <span>Add Income</span>
                 </button>
-                <button class="flex-1 bg-white border border-gray-200 text-gray-700 py-2.5 rounded-lg flex items-center justify-center cursor-pointer" id="addExpenseBtn">
+                <button class="flex-1 bg-white border border-gray-200 text-gray-700 py-2.5 !rounded-button flex items-center justify-center cursor-pointer" id="addExpenseBtn">
                     <i class="ri-subtract-line ri-lg mr-1"></i>
                     <span>Add Expense</span>
                 </button>
@@ -190,21 +191,21 @@
         <!-- Financial Overview -->
         <section class="mb-6">
             <div class="grid grid-cols-3 gap-3">
-                <div class="bg-white p-3 rounded-lg shadow-sm">
+                <div class="bg-white p-3 rounded shadow-sm">
                     <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mb-2">
                         <i class="ri-wallet-3-line text-blue-500"></i>
                     </div>
                     <div class="text-xs text-gray-500 mb-1">Income</div>
                     <div class="font-semibold text-sm">$6,240.00</div>
                 </div>
-                <div class="bg-white p-3 rounded-lg shadow-sm">
+                <div class="bg-white p-3 rounded shadow-sm">
                     <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mb-2">
                         <i class="ri-shopping-bag-line text-red-500"></i>
                     </div>
                     <div class="text-xs text-gray-500 mb-1">Expenses</div>
                     <div class="font-semibold text-sm">$1,954.35</div>
                 </div>
-                <div class="bg-white p-3 rounded-lg shadow-sm">
+                <div class="bg-white p-3 rounded shadow-sm">
                     <div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full mb-2">
                         <i class="ri-bank-line text-purple-500"></i>
                     </div>
@@ -347,7 +348,7 @@
         <section class="mb-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="font-medium">Spending Limits</h2>
-                <button class="bg-primary text-white text-xs px-3 py-1.5 rounded-lg flex items-center cursor-pointer" id="addLimitBtn">
+                <button class="bg-primary text-white text-xs px-3 py-1.5 !rounded-button flex items-center cursor-pointer" id="addLimitBtn">
                     <i class="ri-add-line ri-sm mr-1"></i>
                     <span>Add Limit</span>
                 </button>
@@ -368,10 +369,10 @@
                     <div class="flex items-center gap-3">
                         <div class="text-right">
                             <div class="text-xs text-gray-500">Limit</div>
-<div class="text-sm font-medium">$400 / month</div>
-</div>
-<label class="relative inline-block w-10 h-5 cursor-pointer">
-<input type="checkbox" class="opacity-0 w-0 h-0" checked>
+                            <div class="text-sm font-medium">$400 / month</div>
+                        </div>
+                        <label class="relative inline-block w-10 h-5 cursor-pointer">
+                            <input type="checkbox" class="opacity-0 w-0 h-0" checked>
 <span class="absolute inset-0 rounded-full bg-primary transition-all before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-white before:rounded-full before:transition-all before:translate-x-5"></span>
 </label>
 </div>
