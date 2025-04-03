@@ -38,7 +38,7 @@ content: "\f3c2";
 }
 
 body {
-max-width: 100%; /* Changed from 375px */
+max-width: 100%;
 margin: 0 auto;
 min-height: 100vh;
 position: relative;
@@ -152,12 +152,12 @@ opacity: 1;
 <header class="fixed top-0 w-full bg-white z-50 px-4 py-3 flex justify-between items-center shadow-sm">
 <h1 class="text-xl font-['Pacifico'] text-primary">FinTrack</h1>
 <div class="flex items-center gap-4">
-<div class="w-8 h-8 flex items-center justify-center relative">
+<div class="w-8 h-8 flex items-center justify-center relative cursor-pointer" id="notificationBtn">
 <i class="ri-notification-3-line ri-lg"></i>
 <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
 </div>
-<div class="w-8 h-8 rounded-full overflow-hidden cursor-pointer" id="profileBtn">
-<img src="https://readdy.ai/api/search-image?query=cartoon avatar of a young woman, minimalist design, flat illustration style, simple features, professional look, light background, clean design, [...]">
+<div class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer" id="settingsBtn">
+<i class="ri-settings-3-line ri-lg"></i>
 </div>
 </div>
 </header>
