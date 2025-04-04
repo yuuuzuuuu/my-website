@@ -27,7 +27,7 @@
                 }
             }
         }
-    // Function to show notification
+            // Function to show notification
     function showNotification(message) {
         const notification = document.createElement('div');
         notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded shadow-lg z-50 flex items-center';
@@ -41,11 +41,10 @@
             setTimeout(() => notification.remove(), 300);
         }, 2000);
     }
-
-    // Example usage
+        // Example usage
     document.addEventListener('DOMContentLoaded', function() {
         showNotification('Welcome to FinTrack!');
-    });        
+    });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +54,6 @@
         :where([class^="ri-"])::before {
             content: "\f3c2";
         }
-
         body {
             margin: 0 auto;
             padding: 0 16px;
@@ -63,16 +61,13 @@
             position: relative;
             padding-bottom: 64px;
         }
-
         .progress-ring {
             transform: rotate(-90deg);
         }
-
         .progress-ring__circle {
             transition: stroke-dashoffset 0.35s;
             transform-origin: 50% 50%;
         }
-
         .splash-screen {
             position: fixed;
             top: 0;
@@ -87,66 +82,54 @@
             z-index: 9999;
             animation: fadeOut 1.5s ease 2s forwards;
         }
-
         @keyframes fadeOut {
             0% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
                 visibility: hidden;
             }
         }
-
         .splash-logo {
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0% {
                 transform: scale(1);
             }
-
             50% {
                 transform: scale(1.05);
             }
-
             100% {
                 transform: scale(1);
             }
         }
-
         .modal-container {
             animation: fadeIn 0.3s ease;
         }
-
         @keyframes fadeIn {
             0% {
                 opacity: 0;
             }
-
             100% {
                 opacity: 1;
             }
         }
-
         .modal-container>div {
             animation: slideUp 0.3s ease;
         }
-
         @keyframes slideUp {
             0% {
                 transform: translateY(20px);
                 opacity: 0;
             }
-
             100% {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
-    .fixed {
+     .fixed {
         position: fixed;
     }
     .top-20 {
@@ -198,7 +181,7 @@
     }
     .mr-2 {
         margin-right: 0.5rem;
-    }
+    }       
     </style>
 </head>
 
@@ -840,7 +823,7 @@ if (budgetElements.length >= 3) {
     budgetElements[0].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent = 
         `$${data.budgets.food.spent} / $${data.budgets.food.limit}`;
     
-    // Transportation
+// Transportation
     const transportPercentage = Math.min(100, Math.round((data.budgets.transportation.spent / data.budgets.transportation.limit) * 100));
     const transportOffset = 175.9 - (175.9 * transportPercentage / 100);
     budgetElements[1].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', transportOffset);
@@ -848,7 +831,7 @@ if (budgetElements.length >= 3) {
     budgetElements[1].parentElement.parentElement.querySelector('.text-xs.text-gray-500.mt-1').textContent = 
         `$${data.budgets.transportation.spent} / $${data.budgets.transportation.limit}`;
     
-    // Shopping
+// Shopping
     const shoppingPercentage = Math.min(100, Math.round((data.budgets.shopping.spent / data.budgets.shopping.limit) * 100));
     const shoppingOffset = 175.9 - (175.9 * shoppingPercentage / 100);
     budgetElements[2].querySelector('circle:nth-child(2)').setAttribute('stroke-dashoffset', shoppingOffset);
@@ -1600,7 +1583,7 @@ addExpense(parseFloat(amount), category, date, note);
 }
 
 // Show success notification
-showNotification(`${isIncome ? 'Income' : 'Expense'} added successfully!`);
+showNotification(`${isIncome ? 'Income' : 'Expense'} added successfully!`); 
 updateBalanceSummary();
 });
 const submitBtn = modal.querySelector('.modal-submit-btn');
