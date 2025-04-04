@@ -1,300 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personal Finance</title>
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#10b981',secondary:'#f97316'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-<style>
-:where([class^="ri-"])::before { content: "\f3c2"; }
-body {
-max-width: 375px;
-margin: 0 auto;
-min-height: 100vh;
-position: relative;
-padding-bottom: 64px;
-}
-.progress-ring {
-transform: rotate(-90deg);
-}
-.progress-ring__circle {
-transition: stroke-dashoffset 0.35s;
-transform-origin: 50% 50%;
-}
-.splash-screen {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: linear-gradient(135deg, #10b981, #059669);
-z-index: 9999;
-animation: fadeOut 1.5s ease 2s forwards;
-}
-@keyframes fadeOut {
-0% { opacity: 1; }
-100% { opacity: 0; visibility: hidden; }
-}
-.splash-logo {
-animation: pulse 2s infinite;
-}
-@keyframes pulse {
-0% { transform: scale(1); }
-50% { transform: scale(1.05); }
-100% { transform: scale(1); }
-}
-.modal-container {
-animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-0% { opacity: 0; }
-100% { opacity: 1; }
-}
-.modal-container > div {
-animation: slideUp 0.3s ease;
-}
-@keyframes slideUp {
-0% { transform: translateY(20px); opacity: 0; }
-100% { transform: translateY(0); opacity: 1; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#10b981',
+                    secondary: '#f97316'
+                },
+                borderRadius: {
+                    'none': '0px',
+                    'sm': '4px',
+                    DEFAULT: '8px',
+                    'md': '12px',
+                    'lg': '16px',
+                    'xl': '20px',
+                    '2xl': '24px',
+                    '3xl': '32px'
+                }
+            }
+        }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+    :where([class^="ri-"])::before {
+        content: "\f3c2";
+    }
+    body {
+        max-width: 375px;
+        margin: 0 auto;
+        min-height: 100vh;
+        position: relative;
+        padding-bottom: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .progress-ring {
+        transform: rotate(-90deg);
+    }
+    .progress-ring__circle {
+        transition: stroke-dashoffset 0.35s;
+        transform-origin: 50% 50%;
+    }
+    .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #10b981, #059669);
+        z-index: 9999;
+        animation: fadeOut 1.5s ease 2s forwards;
+    }
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+    .splash-logo {
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    .modal-container {
+        animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .modal-container>div {
+        animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+        0% {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    </style>
 </head>
+
 <body class="bg-gray-50">
-<!-- Splash Screen -->
-<div class="splash-screen">
-<div class="splash-logo mb-6">
-<h1 class="text-5xl font-['Pacifico'] text-white">FinTrack</h1>
-</div>
-<div class="flex flex-col items-center">
-<div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-4">
-<i class="ri-wallet-3-line ri-2x text-white"></i>
-</div>
-<p class="text-white text-lg mb-8">Your Personal Finance Assistant</p>
-<div class="w-16 h-1">
-<div class="w-full h-full bg-white/30 rounded-full overflow-hidden">
-<div class="h-full bg-white rounded-full animate-[progress_2s_ease-in-out]" style="width: 100%; animation: progress 2s ease-in-out forwards;"></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Nav Bar -->
-<header class="fixed top-0 w-full bg-white z-50 px-4 py-3 flex justify-between items-center shadow-sm">
-<h1 class="text-xl font-['Pacifico'] text-primary">FinTrack</h1>
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 flex items-center justify-center relative">
-<i class="ri-notification-3-line ri-lg"></i>
-<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-</div>
-<div class="w-8 h-8 rounded-full overflow-hidden cursor-pointer" id="profileBtn">
-<img src="https://readdy.ai/api/search-image?query=cartoon avatar of a young woman, minimalist design, flat illustration style, simple features, professional look, light background, clean design, the icon should take up 70 of the frame, centered composition&width=100&height=100&seq=123&orientation=squarish" alt="Profile" class="w-full h-full object-cover">
-</div>
-</div>
-</header>
-<!-- Main Content -->
-<main class="pt-16 pb-16 px-4">
-<!-- Balance Summary -->
-<section class="mb-6 mt-4">
-<div class="flex justify-between items-center mb-2">
-<h2 class="text-sm text-gray-500">Total Balance</h2>
-<div class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">April 2025</div>
-</div>
-<div class="flex justify-between items-end mb-2">
-<h3 class="text-2xl font-bold">$4,285.65</h3>
-<div class="flex items-center text-xs text-green-500">
-<i class="ri-arrow-up-line ri-sm mr-1"></i>
-<span>+2.5% from last month</span>
-</div>
-</div>
-<div class="flex gap-2 mt-4">
-<button class="flex-1 bg-primary text-white py-2.5 !rounded-button flex items-center justify-center cursor-pointer" id="addIncomeBtn">
-<i class="ri-add-line ri-lg mr-1"></i>
-<span>Add Income</span>
-</button>
-<button class="flex-1 bg-white border border-gray-200 text-gray-700 py-2.5 !rounded-button flex items-center justify-center cursor-pointer" id="addExpenseBtn">
-<i class="ri-subtract-line ri-lg mr-1"></i>
-<span>Add Expense</span>
-</button>
-</div>
-</section>
-<!-- Financial Overview -->
-<section class="mb-6">
-<div class="grid grid-cols-3 gap-3">
-<div class="bg-white p-3 rounded shadow-sm">
-<div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mb-2">
-<i class="ri-wallet-3-line text-blue-500"></i>
-</div>
-<div class="text-xs text-gray-500 mb-1">Income</div>
-<div class="font-semibold text-sm">$6,240.00</div>
-</div>
-<div class="bg-white p-3 rounded shadow-sm">
-<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mb-2">
-<i class="ri-shopping-bag-line text-red-500"></i>
-</div>
-<div class="text-xs text-gray-500 mb-1">Expenses</div>
-<div class="font-semibold text-sm">$1,954.35</div>
-</div>
-<div class="bg-white p-3 rounded shadow-sm">
-<div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full mb-2">
-<i class="ri-bank-line text-purple-500"></i>
-</div>
-<div class="text-xs text-gray-500 mb-1">Savings</div>
-<div class="font-semibold text-sm">$2,135.65</div>
-</div>
-</div>
-</section>
-<!-- Budget Progress -->
-<section class="mb-6">
-<div class="flex justify-between items-center mb-4">
-<h2 class="font-medium">Budget Progress</h2>
-<a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetBtn">
-View All
-<i class="ri-arrow-right-s-line ri-sm ml-1"></i>
-</a>
-</div>
-<div class="grid grid-cols-3 gap-3">
-<div class="flex flex-col items-center">
-<div class="relative w-16 h-16 mb-2">
-<svg class="progress-ring" width="64" height="64">
-<circle class="progress-ring__circle" stroke="#e0e0e0" stroke-width="4" fill="transparent" r="28" cx="32" cy="32"/>
-<circle class="progress-ring__circle" stroke="#6366f1" stroke-width="4" fill="transparent" r="28" cx="32" cy="32" stroke-dasharray="175.9" stroke-dashoffset="44"/>
-</svg>
-<div class="absolute inset-0 flex items-center justify-center text-xs font-medium">75%</div>
-</div>
-<div class="text-xs text-center">Food & Dining</div>
-<div class="text-xs text-gray-500 mt-1">$450 / $600</div>
-</div>
-<div class="flex flex-col items-center">
-<div class="relative w-16 h-16 mb-2">
-<svg class="progress-ring" width="64" height="64">
-<circle class="progress-ring__circle" stroke="#e0e0e0" stroke-width="4" fill="transparent" r="28" cx="32" cy="32"/>
-<circle class="progress-ring__circle" stroke="#f97316" stroke-width="4" fill="transparent" r="28" cx="32" cy="32" stroke-dasharray="175.9" stroke-dashoffset="70.4"/>
-</svg>
-<div class="absolute inset-0 flex items-center justify-center text-xs font-medium">60%</div>
-</div>
-<div class="text-xs text-center">Transportation</div>
-<div class="text-xs text-gray-500 mt-1">$180 / $300</div>
-</div>
-<div class="flex flex-col items-center">
-<div class="relative w-16 h-16 mb-2">
-<svg class="progress-ring" width="64" height="64">
-<circle class="progress-ring__circle" stroke="#e0e0e0" stroke-width="4" fill="transparent" r="28" cx="32" cy="32"/>
-<circle class="progress-ring__circle" stroke="#f97316" stroke-width="4" fill="transparent" r="28" cx="32" cy="32" stroke-dasharray="175.9" stroke-dashoffset="35.2"/>
-</svg>
-<div class="absolute inset-0 flex items-center justify-center text-xs font-medium">80%</div>
-</div>
-<div class="text-xs text-center">Shopping</div>
-<div class="text-xs text-gray-500 mt-1">$320 / $400</div>
-</div>
-</div>
-</section>
-<!-- Recent Transactions -->
-<section class="mb-6">
-<div class="flex justify-between items-center mb-4">
-<h2 class="font-medium">Recent Transactions</h2>
-<div class="flex gap-2">
-<button class="text-xs bg-primary text-white px-2 py-1 rounded-full cursor-pointer" id="filterAll">All</button>
-<button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterIncome">Income</button>
-<button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
-</div>
-</div>
-<div class="bg-white rounded-lg shadow-sm overflow-hidden">
-<div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mr-3">
-<i class="ri-bank-card-line text-blue-500"></i>
-</div>
-<div>
-<div class="text-sm font-medium">Salary Deposit</div>
-<div class="text-xs text-gray-500">April 1, 2025</div>
-</div>
-</div>
-<div class="text-sm font-medium text-green-500">+$3,250.00</div>
-</div>
-<div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item expense-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
-<i class="ri-shopping-basket-line text-red-500"></i>
-</div>
-<div>
-<div class="text-sm font-medium">Whole Foods Market</div>
-<div class="text-xs text-gray-500">April 3, 2025</div>
-</div>
-</div>
-<div class="text-sm font-medium text-red-500">-$85.32</div>
-</div>
-<div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item expense-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
-<i class="ri-netflex-line text-red-500"></i>
-</div>
-<div>
-<div class="text-sm font-medium">Netflix Subscription</div>
-<div class="text-xs text-gray-500">March 31, 2025</div>
-</div>
-</div>
-<div class="text-sm font-medium text-red-500">-$15.99</div>
-</div>
-<div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mr-3">
-<i class="ri-funds-line text-blue-500"></i>
-</div>
-<div>
-<div class="text-sm font-medium">Stock Dividend</div>
-<div class="text-xs text-gray-500">March 30, 2025</div>
-</div>
-</div>
-<div class="text-sm font-medium text-green-500">+$125.50</div>
-</div>
-<div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item expense-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
-<i class="ri-restaurant-line text-red-500"></i>
-</div>
-<div>
-<div class="text-sm font-medium">Shake Shack</div>
-<div class="text-xs text-gray-500">March 30, 2025</div>
-</div>
-</div>
-<div class="text-sm font-medium text-red-500">-$32.48</div>
-</div>
-<div class="p-3 flex justify-between items-center transaction-item expense-transaction">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
-<i class="ri-taxi-line text-red-500"></i>
-</div>
-<div>
-<div class="text-sm font-medium">Uber Ride</div>
-<div class="text-xs text-gray-500">March 29, 2025</div>
-</div>
-</div>
-<div class="text-sm font-medium text-red-500">-$24.75</div>
-</div>
-</div>
-</section>
-<!-- Spending Limits -->
-<section class="mb-6">
-<div class="flex justify-between items-center mb-4">
-<h2 class="font-medium">Spending Limits</h2>
-<button class="bg-primary text-white text-xs px-3 py-1.5 !rounded-button flex items-center cursor-pointer" id="addLimitBtn">
-<i class="ri-add-line ri-sm mr-1"></i>
-<span>Add Limit</span>
-</button>
-</div>
-<div class="bg-white rounded-lg shadow-sm overflow-hidden">
-<div class="p-3 border-b border-gray-100 flex justify-between items-center">
-<div class="flex items-center">
-<div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full mr-3">
-<i class="ri-shopping-bag-line text-purple-500"></i>
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <div class="splash-logo mb-6">
+            <h1 class="text-5xl font-['Pacifico'] text-white">FinTrack</h1>
+        </div>
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 flex items-center justify-center bg-white/20 rounded-full mb-4">
+                <i class="ri-wallet-3-line ri-2x text-white"></i>
+            </div>
+            <p class="text-white text-lg mb-8">Your Personal Finance Assistant</p>
+            <div class="w-16 h-1">
+                <div class="w-full h-full bg-white/30 rounded-full overflow-hidden">
+                    <div class="h-full bg-white rounded-full animate-[progress_2s_ease-in-out]"
+                        style="width: 100%; animation: progress 2s ease-in-out forwards;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Bar -->
+    <header class="fixed top-0 w-full bg-white z-50 px-4 py-3 flex justify-between items-center shadow-sm">
+        <h1 class="text-xl font-['Pacifico'] text-primary">FinTrack</h1>
+        <div class="flex items-center gap-4">
+            <div class="w-8 h-8 flex items-center justify-center relative">
+                <i class="ri-notification-3-line ri-lg"></i>
+                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+            </div>
+            <div class="w-8 h-8 rounded-full overflow-hidden cursor-pointer" id="profileBtn">
+                <img src="https://readdy.ai/api/search-image?query=cartoon avatar of a young woman, minimalist design, flat illustration style, simple features, professional look, light background, clean design, the [...]">
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="pt-16 pb-16 px-4 w-full">
+        <!-- Balance Summary -->
+        <section class="mb-6 mt-4">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-sm text-gray-500">Total Balance</h2>
+                <div class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">April 2025</div>
+            </div>
+            <div class="flex justify-between items-end mb-2">
+                <h3 class="text-2xl font-bold">$4,285.65</h3>
+                <div class="flex items-center text-xs text-green-500">
+                    <i class="ri-arrow-up-line ri-sm mr-1"></i>
+                    <span>+2.5% from last month</span>
+                </div>
+            </div>
+            <div class="flex gap-2 mt-4">
+                <button
+                    class="flex-1 bg-primary text-white py-2.5 !rounded-button flex items-center justify-center cursor-pointer"
+                    id="addIncomeBtn">
+                    <i class="ri-add-line ri-lg mr-1"></i>
+                    <span>Add Income</span>
+                </button>
+                <button
+                    class="flex-1 bg-white border border-gray-200 text-gray-700 py-2.5 !rounded-button flex items-center justify-center cursor-pointer"
+                    id="addExpenseBtn">
+                    <i class="ri-subtract-line ri-lg mr-1"></i>
+                    <span>Add Expense</span>
+                </button>
+            </div>
+        </section>
+        <!-- Financial Overview -->
+        <section class="mb-6">
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mb-2">
+                        <i class="ri-wallet-3-line text-blue-500"></i>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-1">Income</div>
+                    <div class="font-semibold text-sm">$6,240.00</div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mb-2">
+                        <i class="ri-shopping-bag-line text-red-500"></i>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-1">Expenses</div>
+                    <div class="font-semibold text-sm">$1,954.35</div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full mb-2">
+                        <i class="ri-bank-line text-purple-500"></i>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-1">Savings</div>
+                    <div class="font-semibold text-sm">$2,135.65</div>
+                </div>
+            </div>
+        </section>
+        <!-- Budget Progress -->
+        <section class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-medium">Budget Progress</h2>
+                <a href="#" class="text-xs text-primary flex items-center cursor-pointer" id="viewAllBudgetBtn">
+                    View All
+                    <i class="ri-arrow-right-s-line ri-sm ml-1"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+                <div class="flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-2">
+                        <svg class="progress-ring" width="64" height="64">
+                            <circle class="progress-ring__circle" stroke="#e0e0e0" stroke-width="4" fill="transparent"
+                                r="28" cx="32" cy="32" />
+                            <circle class="progress-ring__circle" stroke="#6366f1" stroke-width="4" fill="transparent"
+                                r="28" cx="32" cy="32" stroke-dasharray="175.9" stroke-dashoffset="44" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center text-xs font-medium">75%</div>
+                    </div>
+                    <div class="text-xs text-center">Food & Dining</div>
+                    <div class="text-xs text-gray-500 mt-1">$450 / $600</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-2">
+                        <svg class="progress-ring" width="64" height="64">
+                            <circle class="progress-ring__circle" stroke="#e0e0e0" stroke-width="4" fill="transparent"
+                                r="28" cx="32" cy="32" />
+                            <circle class="progress-ring__circle" stroke="#f97316" stroke-width="4" fill="transparent"
+                                r="28" cx="32" cy="32" stroke-dasharray="175.9" stroke-dashoffset="70.4" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center text-xs font-medium">60%</div>
+                    </div>
+                    <div class="text-xs text-center">Transportation</div>
+                    <div class="text-xs text-gray-500 mt-1">$180 / $300</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-2">
+                        <svg class="progress-ring" width="64" height="64">
+                            <circle class="progress-ring__circle" stroke="#e0e0e0" stroke-width="4" fill="transparent"
+                                r="28" cx="32" cy="32" />
+                            <circle class="progress-ring__circle" stroke="#f97316" stroke-width="4" fill="transparent"
+                                r="28" cx="32" cy="32" stroke-dasharray="175.9" stroke-dashoffset="35.2" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center text-xs font-medium">80%</div>
+                    </div>
+                    <div class="text-xs text-center">Shopping</div>
+                    <div class="text-xs text-gray-500 mt-1">$320 / $400</div>
+                </div>
+            </div>
+        </section>
+        <!-- Recent Transactions -->
+        <section class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-medium">Recent Transactions</h2>
+                <div class="flex gap-2">
+                    <button class="text-xs bg-primary text-white px-2 py-1 rounded-full cursor-pointer" id="filterAll">All</button>
+                    <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterIncome">Income</button>
+                    <button class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full cursor-pointer" id="filterExpense">Expense</button>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mr-3">
+                            <i class="ri-bank-card-line text-blue-500"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Salary Deposit</div>
+                            <div class="text-xs text-gray-500">April 1, 2025</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-green-500">+$3,250.00</div>
+                </div>
+                <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item expense-transaction">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
+                            <i class="ri-shopping-basket-line text-red-500"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Whole Foods Market</div>
+                            <div class="text-xs text-gray-500">April 3, 2025</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-red-500">-$85.32</div>
+                </div>
+                <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item expense-transaction">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
+                            <i class="ri-netflex-line text-red-500"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Netflix Subscription</div>
+                            <div class="text-xs text-gray-500">March 31, 2025</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-red-500">-$15.99</div>
+                </div>
+                <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item income-transaction">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mr-3">
+                            <i class="ri-funds-line text-blue-500"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Stock Dividend</div>
+                            <div class="text-xs text-gray-500">March 30, 2025</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-green-500">+$125.50</div>
+                </div>
+                <div class="p-3 border-b border-gray-100 flex justify-between items-center transaction-item expense-transaction">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
+                            <i class="ri-restaurant-line text-red-500"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Shake Shack</div>
+                            <div class="text-xs text-gray-500">March 30, 2025</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-red-500">-$32.48</div>
+                </div>
+                <div class="p-3 flex justify-between items-center transaction-item expense-transaction">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
+                            <i class="ri-taxi-line text-red-500"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Uber Ride</div>
+                            <div class="text-xs text-gray-500">March 29, 2025</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-red-500">-$24.75</div>
+                </div>
+            </div>
+        </section>
+        <!-- Spending Limits -->
+        <section class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-medium">Spending Limits</h2>
+                <button class="bg-primary text-white text-xs px-3 py-1.5 !rounded-button flex items-center cursor-pointer" id="addLimitBtn">
+                    <i class="ri-add-line ri-sm mr-1"></i>
+                    <span>Add Limit</span>
+                </button>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="p-3 border-b border-gray-100 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full mr-3">
+                            <i class="ri-shopping-bag-line text-purple-500"></i>
 </div>
 <div>
 <div class="text-sm font-medium">Shopping</div>
