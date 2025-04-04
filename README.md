@@ -36,6 +36,7 @@
     :where([class^="ri-"])::before {
         content: "\f3c2";
     }
+
     body {
         max-width: 375px;
         margin: 0 auto;
@@ -46,13 +47,16 @@
         flex-direction: column;
         align-items: center;
     }
+
     .progress-ring {
         transform: rotate(-90deg);
     }
+
     .progress-ring__circle {
         transition: stroke-dashoffset 0.35s;
         transform-origin: 50% 50%;
     }
+
     .splash-screen {
         position: fixed;
         top: 0;
@@ -67,48 +71,60 @@
         z-index: 9999;
         animation: fadeOut 1.5s ease 2s forwards;
     }
+
     @keyframes fadeOut {
         0% {
             opacity: 1;
         }
+
         100% {
             opacity: 0;
             visibility: hidden;
         }
     }
+
     .splash-logo {
         animation: pulse 2s infinite;
     }
+
     @keyframes pulse {
         0% {
             transform: scale(1);
         }
+
         50% {
             transform: scale(1.05);
         }
+
         100% {
             transform: scale(1);
         }
     }
+
     .modal-container {
         animation: fadeIn 0.3s ease;
     }
+
     @keyframes fadeIn {
         0% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
     }
+
     .modal-container>div {
         animation: slideUp 0.3s ease;
     }
+
     @keyframes slideUp {
         0% {
             transform: translateY(20px);
             opacity: 0;
         }
+
         100% {
             transform: translateY(0);
             opacity: 1;
