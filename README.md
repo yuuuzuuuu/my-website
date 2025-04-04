@@ -445,7 +445,6 @@ if (limitContainer) {
   const categoryName = limitContainer.querySelector('.text-sm.font-medium')?.textContent;
   if (categoryName) {
     showNotification(`${categoryName} limit ${this.checked ? 'activated' : 'deactivated'}`);
-    
     // Update the data in localStorage if needed
     const data = getFinancialData();
     const category = categoryName.toLowerCase().replace(/\s+/g, '');
@@ -1474,14 +1473,13 @@ if (!data.budgets[category]) {
   };
   saveFinancialData(data);
   
-  // Show success notification
+  // Show success notification 
   showNotification(`${getCategoryName(category)} limit added successfully!`);
-  
   // Add the new limit to the UI
   const limitsContainer = document.querySelector('.bg-white.rounded-lg.shadow-sm.overflow-hidden');
   if (limitsContainer) {
     const newLimitHTML = `
-    <div class="p-3 border-b border-gray-100 flex justify-between items-center">
+  <div class="p-3 border-b border-gray-100 flex justify-between items-center">
       <div class="flex items-center">
         <div class="w-8 h-8 flex items-center justify-center bg-indigo-100 rounded-full mr-3">
           <i class="${getCategoryIcon(category)}"></i>
@@ -1506,7 +1504,7 @@ if (!data.budgets[category]) {
     </div>
     `;
     
-    // Insert the new limit at the beginning of the list
+  // Insert the new limit at the beginning of the list
     const firstLimit = limitsContainer.querySelector('.p-3');
     if (firstLimit) {
       firstLimit.insertAdjacentHTML('beforebegin', newLimitHTML);
@@ -1514,7 +1512,7 @@ if (!data.budgets[category]) {
       limitsContainer.innerHTML = newLimitHTML;
     }
     
-    // Reattach event listeners for the toggle
+   // Reattach event listeners for the toggle
     const newToggle = limitsContainer.querySelector('input[type="checkbox"]:not([data-initialized])');
     if (newToggle) {
       newToggle.addEventListener('change', function() {
@@ -1528,15 +1526,14 @@ if (!data.budgets[category]) {
           toggleSpan.classList.add('bg-gray-300');
           toggleSpan.style.setProperty('--transform-translate-x', '0px');
         }
-        
-        // Update the limit status
+             // Update the limit status
         const limitContainer = this.closest('.flex.justify-between.items-center');
         if (limitContainer) {
           const categoryName = limitContainer.querySelector('.text-sm.font-medium')?.textContent;
           if (categoryName) {
             showNotification(`${categoryName} limit ${this.checked ? 'activated' : 'deactivated'}`);
             
-            // Update the data in localStorage
+  // Update the data in localStorage
             const data = getFinancialData();
             const category = categoryName.toLowerCase().replace(/\s+/g, '');
             if (data.budgets[category]) {
