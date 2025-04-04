@@ -13,17 +13,7 @@
                         primary: '#4F46E5',
                         secondary: '#10B981'
                     },
-                    borderRadius: {
-                        'none': '0px',
-                        'sm': '4px',
-                        DEFAULT: '8px',
-                        'md': '12px',
-                        'lg': '16px',
-                        'xl': '20px',
-                        '2xl': '24px',
-                        '3xl': '32px',
-                        'full': '9999px',
-                        'button': '8px'
+                    borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'
                     }
                 }
             }
@@ -32,10 +22,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
     <!-- Tambahkan CSS untuk gaya notifikasi di sini -->
     <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+max-width: 375px;
+margin: 0 auto;
+min-height: 100vh;
+position: relative;
+padding-bottom: 64px;
+}
+.progress-ring {
+transform: rotate(-90deg);
+}
+.progress-ring__circle {
+transition: stroke-dashoffset 0.35s;
+transform-origin: 50% 50%;
+}
+.splash-screen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: linear-gradient(135deg, #10b981, #059669);
+z-index: 9999;
+animation: fadeOut 1.5s ease 2s forwards;
+}
+@keyframes fadeOut {
+0% { opacity: 1; }
+100% { opacity: 0; visibility: hidden; }
+}
+.splash-logo {
+animation: pulse 2s infinite;
+}
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); }
+100% { transform: scale(1); }
+}
+.modal-container {
+animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+.modal-container > div {
+animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+0% { transform: translateY(20px); opacity: 0; }
+100% { transform: translateY(0); opacity: 1; }
+}
         .fixed {
             position: fixed;
         }
