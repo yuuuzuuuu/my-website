@@ -128,7 +128,6 @@
         });
     </script>
 </body>
-</html>
     <!-- Splash Screen -->
     <div class="splash-screen">
         <div class="splash-logo mb-6">
