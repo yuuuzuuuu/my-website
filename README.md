@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Finance</title>
+    <title>Finance Tracker</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#10b981',
-                        secondary: '#f97316'
+                        primary: '#4F46E5',
+                        secondary: '#10B981'
                     },
                     borderRadius: {
                         'none': '0px',
@@ -22,7 +21,9 @@
                         'lg': '16px',
                         'xl': '20px',
                         '2xl': '24px',
-                        '3xl': '32px'
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
                     }
                 }
             }
@@ -31,145 +32,83 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <!-- Tambahkan CSS untuk gaya notifikasi di sini -->
     <style>
-             .fixed {
-        position: fixed;
-    }
-    .top-20 {
-        top: 5rem;
-    }
-    .left-1/2 {
-        left: 50%;
-    }
-    .transform {
-        transform: translate(-50%, 0);
-    }
-    .bg-primary {
-        background-color: #10b981;
-    }
-    .text-white {
-        color: white;
-    }
-    .px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    .py-2 {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-    .rounded {
-        border-radius: 0.25rem;
-    }
-    .shadow-lg {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-    .z-50 {
-        z-index: 50;
-    }
-    .flex {
-        display: flex;
-    }
-    .items-center {
-        align-items: center;
-    }
-    .opacity-0 {
-        opacity: 0;
-    }
-    .transition-opacity {
-        transition: opacity 0.3s;
-    }
-    .duration-300 {
-        transition-duration: 0.3s;
-    }
-    .mr-2 {
-        margin-right: 0.5rem;
-    }       
-        :where([class^="ri-"])::before {
-            content: "\f3c2";
-        }
-        body {
-            margin: 0 auto;
-            padding: 0 16px;
-            min-height: 100vh;
-            position: relative;
-            padding-bottom: 64px;
-        }
-        .progress-ring {
-            transform: rotate(-90deg);
-        }
-        .progress-ring__circle {
-            transition: stroke-dashoffset 0.35s;
-            transform-origin: 50% 50%;
-        }
-        .splash-screen {
+        .fixed {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        }
+        .top-20 {
+            top: 5rem;
+        }
+        .left-1/2 {
+            left: 50%;
+        }
+        .transform {
+            transform: translate(-50%, 0);
+        }
+        .bg-primary {
+            background-color: #4F46E5;
+        }
+        .text-white {
+            color: white;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .rounded {
+            border-radius: 0.25rem;
+        }
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .z-50 {
+            z-index: 50;
+        }
+        .flex {
             display: flex;
-            flex-direction: column;
+        }
+        .items-center {
             align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #10b981, #059669);
-            z-index: 9999;
-            animation: fadeOut 1.5s ease 2s forwards;
         }
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                visibility: hidden;
-            }
+        .opacity-0 {
+            opacity: 0;
         }
-        .splash-logo {
-            animation: pulse 2s infinite;
+        .transition-opacity {
+            transition: opacity 0.3s;
         }
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .duration-300 {
+            transition-duration: 0.3s;
         }
-        .modal-container {
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        .modal-container>div {
-            animation: slideUp 0.3s ease;
-        }
-        @keyframes slideUp {
-            0% {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .mr-2 {
+            margin-right: 0.5rem;
         }
     </style>
 </head>
-
-<body class="bg-gray-50">
-<script>   
-    // Function to show notification
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <!-- Konten Header -->
+        </header>
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-6">
+            <!-- Konten Utama -->
+        </main>
+        <!-- Bottom Navigation -->
+        <nav class="bg-white border-t border-gray-200 fixed bottom-0 w-full">
+            <!-- Konten Navigasi -->
+        </nav>
+    </div>
+    <!-- Tambahkan fungsi JavaScript untuk notifikasi di sini -->
+    <script>
+        // Function to show notification
         function showNotification(message) {
             const notification = document.createElement('div');
             notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded shadow-lg z-50 flex items-center';
@@ -187,7 +126,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             showNotification('Welcome to FinTrack!');
         });
-</script>
+    </script>
+</body>
+</html>
     <!-- Splash Screen -->
     <div class="splash-screen">
         <div class="splash-logo mb-6">
