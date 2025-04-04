@@ -438,6 +438,7 @@ toggleSpan.classList.remove('bg-primary');
 toggleSpan.classList.add('bg-gray-300');
 toggleSpan.style.setProperty('--transform-translate-x', '0px');
 }
+
 // If this is a spending limit toggle, update the limit status
 const limitContainer = this.closest('.flex.justify-between.items-center');
 if (limitContainer) {
@@ -1450,14 +1451,17 @@ const category = modal.querySelector('#limitCategory').value;
 const amount = parseFloat(modal.querySelector('#limitAmount').value);
 const period = modal.querySelector('#limitPeriod').value;
 const notification = modal.querySelector('#limitNotification').checked;
+
 if (!category) {
   showNotification('Please select a category');
   return;
 }
+
 if (!amount || isNaN(amount) || amount <= 0) {
   showNotification('Please enter a valid amount');
   return;
 }
+
 // Add the new limit to the data
 const data = getFinancialData();
 if (!data.budgets[category]) {
@@ -1838,6 +1842,7 @@ item.style.display = 'none';
 }
 });
 });
+
 // Add event listener for view budget details from transactions page
 const viewAllBudgetFromTransactions = document.getElementById('viewAllBudgetFromTransactions');
 if (viewAllBudgetFromTransactions) {
