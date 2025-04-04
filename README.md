@@ -127,7 +127,6 @@
             showNotification('Welcome to FinTrack!');
         });
     </script>
-</body>
     <!-- Splash Screen -->
     <div class="splash-screen">
         <div class="splash-logo mb-6">
