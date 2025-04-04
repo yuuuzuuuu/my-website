@@ -27,30 +27,65 @@
                 }
             }
         }
-            // Function to show notification
-    function showNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded shadow-lg z-50 flex items-center';
-        notification.innerHTML = `
-            <i class="ri-checkbox-circle-line ri-lg mr-2"></i>
-            <span>${message}</span>
-        `;
-        document.body.appendChild(notification);
-        setTimeout(() => {
-            notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
-            setTimeout(() => notification.remove(), 300);
-        }, 2000);
-    }
-        // Example usage
-    document.addEventListener('DOMContentLoaded', function() {
-        showNotification('Welcome to FinTrack!');
-    });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
+             .fixed {
+        position: fixed;
+    }
+    .top-20 {
+        top: 5rem;
+    }
+    .left-1/2 {
+        left: 50%;
+    }
+    .transform {
+        transform: translate(-50%, 0);
+    }
+    .bg-primary {
+        background-color: #10b981;
+    }
+    .text-white {
+        color: white;
+    }
+    .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .py-2 {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .rounded {
+        border-radius: 0.25rem;
+    }
+    .shadow-lg {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .z-50 {
+        z-index: 50;
+    }
+    .flex {
+        display: flex;
+    }
+    .items-center {
+        align-items: center;
+    }
+    .opacity-0 {
+        opacity: 0;
+    }
+    .transition-opacity {
+        transition: opacity 0.3s;
+    }
+    .duration-300 {
+        transition-duration: 0.3s;
+    }
+    .mr-2 {
+        margin-right: 0.5rem;
+    }       
         :where([class^="ri-"])::before {
             content: "\f3c2";
         }
@@ -129,63 +164,30 @@
                 opacity: 1;
             }
         }
-     .fixed {
-        position: fixed;
-    }
-    .top-20 {
-        top: 5rem;
-    }
-    .left-1/2 {
-        left: 50%;
-    }
-    .transform {
-        transform: translate(-50%, 0);
-    }
-    .bg-primary {
-        background-color: #10b981;
-    }
-    .text-white {
-        color: white;
-    }
-    .px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    .py-2 {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-    .rounded {
-        border-radius: 0.25rem;
-    }
-    .shadow-lg {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-    .z-50 {
-        z-index: 50;
-    }
-    .flex {
-        display: flex;
-    }
-    .items-center {
-        align-items: center;
-    }
-    .opacity-0 {
-        opacity: 0;
-    }
-    .transition-opacity {
-        transition: opacity 0.3s;
-    }
-    .duration-300 {
-        transition-duration: 0.3s;
-    }
-    .mr-2 {
-        margin-right: 0.5rem;
-    }       
     </style>
 </head>
 
 <body class="bg-gray-50">
+<script>   
+    // Function to show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded shadow-lg z-50 flex items-center';
+            notification.innerHTML = `
+                <i class="ri-checkbox-circle-line ri-lg mr-2"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+        // Example usage
+        document.addEventListener('DOMContentLoaded', function() {
+            showNotification('Welcome to FinTrack!');
+        });
+</script>
     <!-- Splash Screen -->
     <div class="splash-screen">
         <div class="splash-logo mb-6">
